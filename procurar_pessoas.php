@@ -19,33 +19,22 @@ if (!isset($_SESSION['usuario'])) {
     <script type="text/javascript">
         
         $(document).ready( function(){                                                  // Verifica se pagina está carregada
-            $('#btn-tweet').click( function(){                                          // Ativa função ao clicar no #btn-tweet
+            $('#btn_procurar_pessoa').click( function(){                                // Ativa função ao clicar no #btn-tweet
                 //$('#texto_tweet').val();                                              // Carrega valor do "texto-tweet"
-                if($('#texto_tweet').val().length > 0){                                 // Verifica se o texto-tweet é maior que 0
+                if($('#nome_pessoa').val().length > 0){                                 // Verifica se o texto-tweet é maior que 0
                     
                     $.ajax({                                                            // Função ajax JQuery
-                        url: 'inclui_tweet.php',                                        // Para onde fazer requisição
+                        url: 'get_pessoas.php',                                        // Para onde fazer requisição
                         method: 'post',                                                 // Metodo de envio da requisição
-                        data: $('#form_tweet').serialize(),                             // Quais são as informações enviadas via script
+                        data: $('#form_procurar_pessoas').serialize(),                             // Quais são as informações enviadas via script
                         success: function(data){ 
-                            $('#texto_tweet').val('');                                       // Havendo sucesso, executa a função response text
-                            atualizaTweet();
+                            $('#pessoas').html(data);                                       // Havendo sucesso, executa a função response text
+                            //atualizaTweet();
                         }
                     });
                 }
 
             });
-
-            function atualizaTweet(){                                                   // Carregar os tweets
-                $.ajax({
-                    url: 'get_tweet.php',
-                    success: function(data){
-                        $('#tweets').html(data);
-
-                    }
-                });
-            }
-            atualizaTweet();
         });
     </script>
 </head>
@@ -65,6 +54,9 @@ if (!isset($_SESSION['usuario'])) {
 
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
+                <li>
+                        <a href="home.php">Home</a>
+                    </li>
                     <li>
                         <a href="sair.php">Sair</a>
                     </li>
@@ -95,31 +87,33 @@ if (!isset($_SESSION['usuario'])) {
                 </div>
             </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-8">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <!-- Form dos Tweets-->
-                    <form id="form_tweet" class="input-group">
-                        <input type="text" id="texto_tweet" name="texto_tweet" class="form-control" placeholder="O que está acontecendo agora?" maxlenght="200"/>
+
+                    <!-- Form dda procura-->
+                    <form id="form_procurar_pessoas" class="input-group">
+                        <input type="text" id="nome_pessoa" name="nome_pessoa" class="form-control" placeholder="Quem você está procurando?" maxlenght="200"/>
                         <span class="input-group-btn">
-                            <button class="btn btn-default" id="btn-tweet" type="button">Tweet</button>
+                            <button class="btn btn-default" id="btn_procurar_pessoa" type="button">Procurar</button>
                         </span>
                     </form>
                 </div>
             </div>
             <!-- Div dos Tweets-->
-            <div id="tweets" class="list-group">    
+            <div id="pessoas" class="list-group">    
             </div>
             <!-- Fim Div dos Tweets-->
         </div>
+        
+        <!--
         <div class="col-md-3">
             <div class="panel panel-default">
                     <div class="panel-body">
-                        <h4><a href="procurar_pessoas.php">Procurar por pessoas</a></h4>
                     </div>
             </div>
         </div>
-            
+         -->   
     </div>
 
 
