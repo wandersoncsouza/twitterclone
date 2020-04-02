@@ -27,8 +27,9 @@ if (!isset($_SESSION['usuario'])) {
                         url: 'inclui_tweet.php',                                        // Para onde fazer requisição
                         method: 'post',                                                 // Metodo de envio da requisição
                         data: $('#form_tweet').serialize(),                             // Quais são as informações enviadas via script
-                        success: function(data){                                        // Havendo sucesso, executa a função response text
-                            alert(data);
+                        success: function(data){ 
+                            $('#texto_tweet').val('');                                       // Havendo sucesso, executa a função response text
+                            alert('Tweet incluído com sucesso!');
                         }
                     });
                 }

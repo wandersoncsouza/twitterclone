@@ -6,7 +6,7 @@ $usuario = $_POST['usuario'];
 $senha= md5($_POST['senha']);
 
 //$sql = "SELECT * FROM usuarios  WHERE usuario = '$usuario' AND senha = '$senha'";
-$sql = "SELECT usuario, email FROM usuarios  WHERE usuario = '$usuario' AND senha = '$senha'";
+$sql = "SELECT id, usuario, email FROM usuarios  WHERE usuario = '$usuario' AND senha = '$senha'";
 
 $objDb =new db();                                           //Instanciamento da classe db
 $link = $objDb->conecta_mysql();                            //Execução da função conecta_mysql
@@ -18,6 +18,7 @@ if($resultado_id){
     //var_dump($dados_usuario);
     if(isset($dados_usuario['usuario'])){                   // Teste condição usuario no banco de dados
         
+        $_SESSION['id_usuario'] = $dados_usuario['id'];
         $_SESSION['usuario'] = $dados_usuario['usuario'];
         $_SESSION['email'] = $dados_usuario['email'];
 
