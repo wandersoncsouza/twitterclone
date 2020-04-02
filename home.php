@@ -39,9 +39,6 @@ if (!isset($_SESSION['usuario'])) {
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <?= $_SESSION['usuario'] ?>
-                    </li>
-                    <li>
                         <a href="sair.php">Sair</a>
                     </li>
                 </ul>
@@ -54,22 +51,40 @@ if (!isset($_SESSION['usuario'])) {
 
     <div class="container">
 
-        <br /><br />
-
-        <div class="col-md-4"></div>
-        <div class="col-md-4">
-            <h3>Bem vindo </h3>
-            <br />
-
+        <div class="col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h4><?= $_SESSION['usuario'] ?></h4>
+                    <hr/>
+                    <div class="col-md-6">
+                        TWEETS <br/>1
+                    </div>
+                    <div class="col-md-6">
+                        SEGUIDORES <br/>1
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="col-md-4"></div>
-
-        <div class="clearfix"></div>
-        <br />
-        <div class="col-md-4"></div>
-        <div class="col-md-4"></div>
-        <div class="col-md-4"></div>
-
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="O que está acontecendo agora?" maxlenght="200"/>
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button">Tweet</button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="panel panel-default">
+                    <div class="panel-body">
+                        <h4><a href="#">Procurar por pessoas</a></h4>
+                    </div>
+            </div>
+        </div>
+            
     </div>
 
 
