@@ -10,19 +10,34 @@ if (!isset($_SESSION['usuario'])) {
 
 <head>
     <meta charset="UTF-8">
-
     <title>Twitter clone</title>
-
     <!-- jquery - link cdn -->
     <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
-
     <!-- bootstrap - link cdn -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 
+    <script type="text/javascript">
+        
+        $(document).ready( function(){                                                  // Verifica se pagina está carregada
+            $('#btn-tweet').click( function(){                                          // Ativa função ao clicar no #btn-tweet
+                //$('#texto_tweet').val();                                              // Carrega valor do "texto-tweet"
+                if($('#texto_tweet').val().length > 0){                                 // Verifica se o texto-tweet é maior que 0
+                    
+                    $.ajax({                                                            // Função ajax JQuery
+                        url: 'inclui_tweet.php',                                        // Para onde fazer requisição
+                        method: 'post',                                                 // Metodo de envio da requisição
+                        data: $('#form_tweet').serialize(),                             // Quais são as informações enviadas via script
+                        success: function(data){                                        // Havendo sucesso, executa a função response text
+                            alert(data);
+                        }
+                    });
+                }
+
+            });
+        });
+    </script>
 </head>
-
 <body>
-
     <!-- Static navbar -->
     <nav class="navbar navbar-default navbar-static-top">
         <div class="container">
@@ -68,12 +83,12 @@ if (!isset($_SESSION['usuario'])) {
         <div class="col-md-6">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="O que está acontecendo agora?" maxlenght="200"/>
+                    <form id="form_tweet" class="input-group">
+                        <input type="text" id="texto_tweet" name="texto_tweet" class="form-control" placeholder="O que está acontecendo agora?" maxlenght="200"/>
                         <span class="input-group-btn">
-                            <button class="btn btn-default" type="button">Tweet</button>
+                            <button class="btn btn-default" id="btn-tweet" type="button">Tweet</button>
                         </span>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
