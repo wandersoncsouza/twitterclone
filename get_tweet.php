@@ -14,7 +14,9 @@ $link = $objDb->conecta_mysql();
   
 $sql = "SELECT DATE_FORMAT(t.data_inclusao, '%d %b %Y %T') AS dt_format, t.data_inclusao, t.tweet, u.usuario ";
 $sql.= "FROM tweet AS t JOIN usuarios AS u ON (t.id_usuario = u.id)";                                  // Join realizado entre a tabela tweet e usuarios
-$sql.= "WHERE id_usuario = $id_usuario ORDER BY data_inclusao DESC";                                   // Seleção de todos os registros por ordem de data decrescente do usuario da sessão
+$sql.= "WHERE id_usuario = $id_usuario ";
+$sql.= "OR id_usuario IN (SELECT seguindo_id_usuario FROM usuarios_seguidores WHERE id_usuario = $id_usuario)";
+$sql.= "ORDER BY data_inclusao DESC";                                   
 $resultado_id = mysqli_query($link, $sql);
 
 if($resultado_id){
