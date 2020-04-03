@@ -62,3 +62,5 @@ if(mysqli_query($link, $sql)){
 } else{
     echo '<center><h2>Erro ao registrar o usuário</h2></center>';
 }
+echo '<center><a href="inscrevase.php">Voltar</a></center><br/>';
+echo '<center><a href="index.php">Voltar para Home</a></center>';
